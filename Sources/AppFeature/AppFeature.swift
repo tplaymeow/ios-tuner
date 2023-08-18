@@ -6,7 +6,7 @@ import PitchDetection
 public struct AppFeature: Reducer {
   public struct State {
     public var appearedOnce: Bool = false
-    public var pitch: Pitch = Pitch(frequency: 0.0)
+    public var note: Note?
 
     public init() { }
   }
@@ -14,7 +14,7 @@ public struct AppFeature: Reducer {
   public enum Action { 
     case onAppear
     case recordPermissionResult(Bool)
-    case setPitch(Pitch)
+    case setNote(Note)
   }
 
   public var body: some ReducerOf<Self> {
@@ -39,7 +39,8 @@ public struct AppFeature: Reducer {
           let stream = try await self.microphoneMonitor.start()
           for await (buffer, time) in stream {
             let pitch = try PitchDetection.process(buffer: buffer, time: time)
-            await send(.setPitch(pitch))
+            let (note, _) = pitch.closetNote
+            await send(.setNote(note))
           }
         } catch: { error, send in
           // TODO: Handle error
@@ -48,8 +49,8 @@ public struct AppFeature: Reducer {
       case .recordPermissionResult(false):
         return .none
 
-      case let .setPitch(newValue):
-        state.pitch = newValue
+      case let .setNote(newValue):
+        state.note = newValue
         return .none
       }
     }

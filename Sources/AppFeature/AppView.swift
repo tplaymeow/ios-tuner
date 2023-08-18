@@ -3,11 +3,15 @@ import ComposableArchitecture
 
 public struct AppView: View {
   public var body: some View {
-    WithViewStore(self.store, observe: \.pitch) { viewStore in
-      Text(viewStore.state.frequency.formatted())
-        .onAppear{
-          viewStore.send(.onAppear)
+    WithViewStore(self.store, observe: \.note) { viewStore in
+      VStack {
+        if let note = viewStore.state {
+          Text(note.description)
         }
+      }
+      .onAppear{
+        viewStore.send(.onAppear)
+      }
     }
   }
 
