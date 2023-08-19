@@ -1,22 +1,24 @@
 import SwiftUI
 import ComposableArchitecture
 import PitchDetection
+import InstrumentFeature
 
 public struct AppView: View {
   public var body: some View {
-    WithViewStore(self.store, observe: \.closestNote) { viewStore in
-      VStack {
-        if let closestNote = viewStore.state {
-          Text(closestNote.note.displayString)
-            .bold()
-          Text(closestNote.distanceToNote.cents.formatted())
-          Text(closestNote.pitch.frequency.formatted())
-        }
-      }
-      .onAppear{
-        viewStore.send(.onAppear)
-      }
-    }
+    InstrumentView()
+//    WithViewStore(self.store, observe: \.closestNote) { viewStore in
+//      VStack {
+//        if let closestNote = viewStore.state {
+//          Text(closestNote.note.displayString)
+//            .bold()
+//          Text(closestNote.distanceToNote.cents.formatted())
+//          Text(closestNote.pitch.frequency.formatted())
+//        }
+//      }
+//      .onAppear{
+//        viewStore.send(.onAppear)
+//      }
+//    }
   }
 
   public init(store: StoreOf<AppFeature>) {

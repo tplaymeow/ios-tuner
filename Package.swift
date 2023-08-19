@@ -14,6 +14,7 @@ let package = Package(
     .library(name: "MicrophoneMonitoringClient", targets: ["MicrophoneMonitoringClient"]),
     .library(name: "PitchDetection", targets: ["PitchDetection"]),
     .library(name: "AppFeature", targets: ["AppFeature"]),
+    .library(name: "InstrumentFeature", targets: ["InstrumentFeature"]),
     .library(name: "TestHelpers", targets: ["TestHelpers"])
   ],
   dependencies: [
@@ -47,7 +48,17 @@ let package = Package(
         "AudioSessionClient",
         "MicrophoneMonitoringClient",
         "PitchDetection",
+        "InstrumentFeature",
         .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+      ]
+    ),
+    .target(
+      name: "InstrumentFeature",
+      dependencies: [
+        .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+      ],
+      resources: [
+        .process("InstrumentScene.scn"),
       ]
     ),
     .target(name: "TestHelpers"),
