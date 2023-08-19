@@ -7,15 +7,18 @@ let package = Package(
   name: "tuner-package",
   platforms: [
     .iOS(.v16),
+    .macOS(.v12), // FIXME: Only for benchmarks
   ],
   products: [
     .library(name: "AudioSessionClient", targets: ["AudioSessionClient"]),
     .library(name: "MicrophoneMonitoringClient", targets: ["MicrophoneMonitoringClient"]),
     .library(name: "PitchDetection", targets: ["PitchDetection"]),
     .library(name: "AppFeature", targets: ["AppFeature"]),
+    .library(name: "TestHelpers", targets: ["TestHelpers"])
   ],
   dependencies: [
     .package(url: "https://github.com/pointfreeco/swift-composable-architecture", exact: "1.1.0"),
+    .package(url: "https://github.com/google/swift-benchmark", from: "0.1.0"),
   ],
   targets: [
     .target(
@@ -31,6 +34,13 @@ let package = Package(
       ]
     ),
     .target(name: "PitchDetection"),
+    .testTarget(
+      name: "PitchDetectionTests",
+      dependencies: [
+        "TestHelpers",
+        "PitchDetection",
+      ]
+    ),
     .target(
       name: "AppFeature",
       dependencies: [
@@ -38,6 +48,14 @@ let package = Package(
         "MicrophoneMonitoringClient",
         "PitchDetection",
         .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+      ]
+    ),
+    .target(name: "TestHelpers"),
+    .executableTarget(
+      name: "PitchDetectionBenchmarks",
+      dependencies: [
+        "PitchDetection",
+        .product(name: "Benchmark", package: "swift-benchmark"),
       ]
     ),
   ]

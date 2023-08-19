@@ -18,8 +18,11 @@ public enum PitchDetection {
       count: Int(buffer.frameLength)
     )
 
-    let bufferArray = Array(bufferPointer)
-
-    return Pitch(frequency: bufferArray.first!)
+    return Pitch(
+      frequency: YIN.process(
+        buffer: bufferPointer,
+        sampleRate: Float(time.sampleRate)
+      )
+    )
   }
 }

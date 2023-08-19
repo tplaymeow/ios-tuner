@@ -30,6 +30,11 @@ extension MicrophoneMonitoringClient {
       engine.prepare()
       try engine.start()
 
+      continuation.onTermination = { _ in
+        engine.stop()
+        engine.inputNode.removeTap(onBus: Self.bus)
+      }
+
       self.engine = engine
 
       return stream
@@ -47,4 +52,3 @@ extension MicrophoneMonitoringClient {
     private static let bufferSize: AVAudioFrameCount = 2048
   }
 }
-
