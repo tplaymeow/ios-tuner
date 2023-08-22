@@ -18,7 +18,7 @@ extension MicrophoneMonitoringClient: DependencyKey {
   }
 }
 
-public struct MicrophoneMonitoringClient {
+public struct MicrophoneMonitoringClient: Sendable {
   public var start: @Sendable () async throws -> AsyncStream<(AVAudioPCMBuffer, AVAudioTime)>
   public var finish: @Sendable () async -> Void
 }

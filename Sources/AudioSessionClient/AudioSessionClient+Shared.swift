@@ -2,11 +2,10 @@ import AVFoundation
 
 extension AudioSessionClient {
   public static var shared: Self {
-    let session = AVAudioSession.sharedInstance()
-    return Self(
+    Self(
       requestRecordPermission: {
         await withCheckedContinuation { continuation in
-          session.requestRecordPermission { granted in
+          AVAudioSession.sharedInstance().requestRecordPermission { granted in
             continuation.resume(returning: granted)
           }
         }

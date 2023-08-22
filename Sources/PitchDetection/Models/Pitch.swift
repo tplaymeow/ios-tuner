@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Pitch: Equatable {
+public struct Pitch: Equatable, Sendable {
   public let frequency: Float
 
   @usableFromInline

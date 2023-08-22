@@ -1,4 +1,4 @@
-import AVFoundation
+@preconcurrency import AVFoundation
 
 extension MicrophoneMonitoringClient {
   public static var liveValue: Self {

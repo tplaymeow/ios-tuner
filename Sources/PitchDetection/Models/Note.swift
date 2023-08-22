@@ -1,7 +1,7 @@
 import Foundation
 
-public struct Note: Equatable, Hashable {
-  public enum PitchClass: Equatable {
+public struct Note: Equatable, Hashable, Sendable {
+  public enum PitchClass: Equatable, Sendable {
     case C
     case CSharp
     case D

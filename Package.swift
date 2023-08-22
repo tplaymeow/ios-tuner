@@ -27,12 +27,18 @@ let package = Package(
       name: "AudioSessionClient",
       dependencies: [
         .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+      ],
+      swiftSettings: [
+        .enableExperimentalFeature("StrictConcurrency=complete"),
       ]
     ),
     .target(
       name: "MicrophoneMonitoringClient",
       dependencies: [
         .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+      ],
+      swiftSettings: [
+        .enableExperimentalFeature("StrictConcurrency=complete"),
       ]
     ),
     .target(name: "PitchDetection"),
@@ -41,6 +47,9 @@ let package = Package(
       dependencies: [
         "TestHelpers",
         "PitchDetection",
+      ],
+      swiftSettings: [
+        .enableExperimentalFeature("StrictConcurrency=complete"),
       ]
     ),
     .target(
@@ -51,6 +60,9 @@ let package = Package(
         "PitchDetection",
         "InstrumentFeature",
         .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+      ],
+      swiftSettings: [
+        .enableExperimentalFeature("StrictConcurrency=complete"),
       ]
     ),
     .target(
@@ -62,6 +74,9 @@ let package = Package(
       ],
       resources: [
         .process("Resources"),
+      ],
+      swiftSettings: [
+        .enableExperimentalFeature("StrictConcurrency=complete"),
       ]
     ),
     .target(name: "TestHelpers"),
@@ -71,6 +86,9 @@ let package = Package(
       dependencies: [
         "PitchDetection",
         .product(name: "Benchmark", package: "swift-benchmark"),
+      ],
+      swiftSettings: [
+        .enableExperimentalFeature("StrictConcurrency=complete"),
       ]
     ),
   ]

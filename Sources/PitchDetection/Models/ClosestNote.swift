@@ -1,4 +1,4 @@
-public struct ClosestNote: Equatable {
+public struct ClosestNote: Equatable, Sendable {
   public let pitch: Pitch
   public let note: Note
 

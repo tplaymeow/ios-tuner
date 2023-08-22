@@ -22,7 +22,7 @@ extension AudioSessionClient: DependencyKey {
   }
 }
 
-public struct AudioSessionClient {
+public struct AudioSessionClient: Sendable {
   public var requestRecordPermission: @Sendable () async -> Bool
   public var setupForRecording: @Sendable () async throws -> Void
 }

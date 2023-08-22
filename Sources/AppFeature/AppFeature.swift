@@ -4,7 +4,7 @@ import AudioSessionClient
 import MicrophoneMonitoringClient
 import PitchDetection
 
-public struct AppFeature: Reducer {
+public struct AppFeature: Reducer, Sendable {
   public struct State: Equatable {
     public var appearedOnce: Bool = false
     public var instruments: InstrumentsFeature.State = .guitar(.init(configuration: .init(
@@ -19,7 +19,7 @@ public struct AppFeature: Reducer {
     public init() { }
   }
 
-  public enum Action { 
+  public enum Action: Sendable{
     case onAppear
     case recordPermissionResult(Bool)
     case setClosestNote(ClosestNote?)
@@ -69,7 +69,7 @@ public struct AppFeature: Reducer {
       case .instruments:
         return .none
       }
-    }._printChanges()
+    }
   }
 
   public init() { }

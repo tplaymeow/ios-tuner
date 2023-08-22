@@ -36,7 +36,7 @@ public struct InstrumentsFeature: Reducer {
     }
   }
 
-  public enum Action {
+  public enum Action: Sendable {
     case guitar(InstrumentAction)
     case ukulele(InstrumentAction)
   }

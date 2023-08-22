@@ -3,6 +3,7 @@ import Combine
 import ComposableArchitecture
 import Helpers
 
+@MainActor
 final class GuitarSceneProxy {
   lazy var scene: SCNScene? = {
     let result = SCNScene.load(file: "GuitarScene", bundle: .module)
@@ -20,10 +21,6 @@ final class GuitarSceneProxy {
     self.store = store
     self.viewStore = ViewStore(store, observe: { $0 })
     self.setup()
-  }
-
-  deinit {
-    self.cancellables.cancel()
   }
 
   private let store: StoreOf<InstrumentFeature<InstrumentState6>>
