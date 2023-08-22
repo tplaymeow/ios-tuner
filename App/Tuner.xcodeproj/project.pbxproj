@@ -19,6 +19,7 @@
 		200657302A8EAFCC0089928F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		200657332A8EAFCC0089928F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2006573A2A8EB07B0089928F /* tuner-ios */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "tuner-ios"; path = ..; sourceTree = "<group>"; };
+		20A662B52A951821000EC564 /* Tuner.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Tuner.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +38,7 @@
 			isa = PBXGroup;
 			children = (
 				2006573A2A8EB07B0089928F /* tuner-ios */,
+				20A662B52A951821000EC564 /* Tuner.xctestplan */,
 				2006572B2A8EAFCA0089928F /* Tuner */,
 				2006572A2A8EAFCA0089928F /* Products */,
 				201634712A8EB4A200244DEC /* Frameworks */,

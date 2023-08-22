@@ -1,0 +1,29 @@
+{
+  "configurations" : [
+    {
+      "id" : "7519D88D-8B12-4B27-B2F1-00057C73EB2C",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:Tuner.xcodeproj",
+      "identifier" : "200657282A8EAFCA0089928F",
+      "name" : "Tuner"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:..",
+        "identifier" : "PitchDetectionTests",
+        "name" : "PitchDetectionTests"
+      }
+    }
+  ],
+  "version" : 1
+}
