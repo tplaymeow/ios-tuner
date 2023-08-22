@@ -1,5 +1,5 @@
-import XCTest
 import PitchDetection
+import XCTest
 
 final class NoteDistanceTests: XCTestCase {
   func testBetweenNotes() {
@@ -16,7 +16,7 @@ final class NoteDistanceTests: XCTestCase {
 
   func testBetweenNotePitch() {
     let note = Note(pitchClass: .A, octave: 0)
-    let pitch = Pitch(frequency: 30.86771) // B0
+    let pitch = Pitch(frequency: 30.86771)  // B0
 
     XCTAssertEqual(NoteDistance.between(from: note, to: pitch).semitones, 2.0, accuracy: 0.0001)
     XCTAssertEqual(NoteDistance.between(from: pitch, to: note).semitones, -2.0, accuracy: 0.0001)

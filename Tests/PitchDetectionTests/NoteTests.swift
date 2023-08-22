@@ -1,5 +1,5 @@
-import XCTest
 import PitchDetection
+import XCTest
 
 final class NoteTests: XCTestCase {
   func testFrequency() {
@@ -34,7 +34,7 @@ final class NoteTests: XCTestCase {
     XCTAssertEqual(Note(pitchClass: .A, octave: 3).frequency, 220.0000, accuracy: 0.0001)
     XCTAssertEqual(Note(pitchClass: .ASharp, octave: 3).frequency, 233.0819, accuracy: 0.0001)
     XCTAssertEqual(Note(pitchClass: .B, octave: 3).frequency, 246.9417, accuracy: 0.0001)
-    
+
     XCTAssertEqual(Note(pitchClass: .C, octave: 4).frequency, 261.6256, accuracy: 0.0001)
     XCTAssertEqual(Note(pitchClass: .CSharp, octave: 4).frequency, 277.1826, accuracy: 0.0001)
     XCTAssertEqual(Note(pitchClass: .D, octave: 4).frequency, 293.6648, accuracy: 0.0001)

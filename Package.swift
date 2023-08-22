@@ -21,6 +21,7 @@ let package = Package(
   dependencies: [
     .package(url: "https://github.com/pointfreeco/swift-composable-architecture", exact: "1.1.0"),
     .package(url: "https://github.com/google/swift-benchmark", from: "0.1.0"),
+    .package(url: "https://github.com/apple/swift-format", exact: "508.0.0"),
   ],
   targets: [
     .target(

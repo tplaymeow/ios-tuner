@@ -51,5 +51,5 @@ public struct InstrumentsFeature: Reducer {
       }
   }
 
-  public init() { }
+  public init() {}
 }

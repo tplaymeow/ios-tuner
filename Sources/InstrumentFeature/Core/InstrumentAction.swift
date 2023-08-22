@@ -1,1 +1,1 @@
-public enum InstrumentAction: Sendable { }
+public enum InstrumentAction: Sendable {}

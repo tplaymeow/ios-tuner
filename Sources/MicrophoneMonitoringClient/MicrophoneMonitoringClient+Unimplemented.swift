@@ -12,8 +12,8 @@ extension MicrophoneMonitoringClient {
 extension MicrophoneMonitoringClient {
   public static var dummy: Self {
     Self(
-      start: { .never } ,
-      finish: { }
+      start: { .never },
+      finish: {}
     )
   }
 }

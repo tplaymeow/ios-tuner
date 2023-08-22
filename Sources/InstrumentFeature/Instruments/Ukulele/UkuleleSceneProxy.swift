@@ -1,7 +1,7 @@
-import SceneKit
 import Combine
 import ComposableArchitecture
 import Helpers
+import SceneKit
 
 @MainActor
 final class UkuleleSceneProxy {

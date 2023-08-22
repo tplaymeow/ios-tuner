@@ -1,9 +1,9 @@
-import XCTest
 import PitchDetection
+import XCTest
 
 final class PitchTests: XCTestCase {
   func testClosestEmpty() {
-    let pitch = Pitch(frequency: 30.86771) // B0
+    let pitch = Pitch(frequency: 30.86771)  // B0
     XCTAssertNil(pitch.closest(of: .init()))
   }
 
@@ -12,7 +12,7 @@ final class PitchTests: XCTestCase {
     let b0 = Note(pitchClass: .B, octave: 0)
     let b1 = Note(pitchClass: .B, octave: 1)
 
-    let pitch = Pitch(frequency: 30.86) // almost B0
+    let pitch = Pitch(frequency: 30.86)  // almost B0
 
     XCTAssertEqual(pitch.closest(of: [a0, b1, b0])?.note, b0)
     XCTAssertEqual(pitch.closest(of: [a0, b1])?.note, a0)

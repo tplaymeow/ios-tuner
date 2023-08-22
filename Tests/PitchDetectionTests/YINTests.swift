@@ -1,6 +1,6 @@
-import XCTest
-import TestHelpers
 @_spi(YIN) import PitchDetection
+import TestHelpers
+import XCTest
 
 final class YINTests: XCTestCase {
   func testDifferenceResult() {
@@ -36,7 +36,6 @@ final class YINTests: XCTestCase {
     let input111: [Float] = .init(count: 111) {
       Float.random(in: -100...100)
     }
-
 
     let result4 = input4.withUnsafeBufferPointer { buffer in
       YIN.difference(buffer: buffer)
@@ -97,7 +96,7 @@ final class YINTests: XCTestCase {
   }
 
   func testProcess() {
-    
+
   }
 }
 

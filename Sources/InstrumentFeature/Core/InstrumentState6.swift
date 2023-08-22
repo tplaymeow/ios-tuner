@@ -13,7 +13,7 @@ public struct InstrumentState6: Equatable, InstrumentState {
       target1: Note,
       target2: Note,
       target3: Note,
-      target4: Note, 
+      target4: Note,
       target5: Note,
       target6: Note
     ) {

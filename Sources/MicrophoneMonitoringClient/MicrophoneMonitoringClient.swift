@@ -1,5 +1,5 @@
-import Dependencies
 import AVFoundation
+import Dependencies
 
 extension DependencyValues {
   public var microphoneMonitoring: MicrophoneMonitoringClient {

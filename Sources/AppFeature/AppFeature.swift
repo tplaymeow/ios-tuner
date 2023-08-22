@@ -1,25 +1,27 @@
+import AudioSessionClient
 import ComposableArchitecture
 import InstrumentFeature
-import AudioSessionClient
 import MicrophoneMonitoringClient
 import PitchDetection
 
 public struct AppFeature: Reducer, Sendable {
   public struct State: Equatable {
     public var appearedOnce: Bool = false
-    public var instruments: InstrumentsFeature.State = .guitar(.init(configuration: .init(
-      target1: .init(pitchClass: .E, octave: 2),
-      target2: .init(pitchClass: .A, octave: 2),
-      target3: .init(pitchClass: .D, octave: 3),
-      target4: .init(pitchClass: .G, octave: 3),
-      target5: .init(pitchClass: .B, octave: 3),
-      target6: .init(pitchClass: .E, octave: 4)
-    )))
+    public var instruments: InstrumentsFeature.State = .guitar(
+      .init(
+        configuration: .init(
+          target1: .init(pitchClass: .E, octave: 2),
+          target2: .init(pitchClass: .A, octave: 2),
+          target3: .init(pitchClass: .D, octave: 3),
+          target4: .init(pitchClass: .G, octave: 3),
+          target5: .init(pitchClass: .B, octave: 3),
+          target6: .init(pitchClass: .E, octave: 4)
+        )))
 
-    public init() { }
+    public init() {}
   }
 
-  public enum Action: Sendable{
+  public enum Action: Sendable {
     case onAppear
     case recordPermissionResult(Bool)
     case setClosestNote(ClosestNote?)
@@ -72,7 +74,7 @@ public struct AppFeature: Reducer, Sendable {
     }
   }
 
-  public init() { }
+  public init() {}
 
   @Dependency(\.audioSession)
   private var audioSession

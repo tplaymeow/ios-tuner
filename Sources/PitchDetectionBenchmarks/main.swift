@@ -1,5 +1,5 @@
 import Benchmark
 
 Benchmark.main([
-  yinSuite,
+  yinSuite
 ])
