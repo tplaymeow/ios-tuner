@@ -15,7 +15,8 @@ let package = Package(
     .library(name: "PitchDetection", targets: ["PitchDetection"]),
     .library(name: "AppFeature", targets: ["AppFeature"]),
     .library(name: "InstrumentFeature", targets: ["InstrumentFeature"]),
-    .library(name: "TestHelpers", targets: ["TestHelpers"])
+    .library(name: "TestHelpers", targets: ["TestHelpers"]),
+    .library(name: "Helpers", targets: ["Helpers"]),
   ],
   dependencies: [
     .package(url: "https://github.com/pointfreeco/swift-composable-architecture", exact: "1.1.0"),
@@ -55,13 +56,16 @@ let package = Package(
     .target(
       name: "InstrumentFeature",
       dependencies: [
+        "PitchDetection",
+        "Helpers",
         .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
       ],
       resources: [
-        .process("InstrumentScene.scn"),
+        .process("Resources"),
       ]
     ),
     .target(name: "TestHelpers"),
+    .target(name: "Helpers"),
     .executableTarget(
       name: "PitchDetectionBenchmarks",
       dependencies: [

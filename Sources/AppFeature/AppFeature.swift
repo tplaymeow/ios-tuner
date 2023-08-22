@@ -1,20 +1,20 @@
 import ComposableArchitecture
+import InstrumentFeature
 import AudioSessionClient
 import MicrophoneMonitoringClient
 import PitchDetection
 
 public struct AppFeature: Reducer {
-  public struct State {
+  public struct State: Equatable {
     public var appearedOnce: Bool = false
-    public var closestNote: ClosestNote?
-    public var targetNotes: Set<Note> = [
-      Note(pitchClass: .E, octave: 2),
-      Note(pitchClass: .A, octave: 2),
-      Note(pitchClass: .D, octave: 3),
-      Note(pitchClass: .G, octave: 3),
-      Note(pitchClass: .B, octave: 3),
-      Note(pitchClass: .E, octave: 4),
-    ]
+    public var instruments: InstrumentsFeature.State = .guitar(.init(configuration: .init(
+      target1: .init(pitchClass: .E, octave: 2),
+      target2: .init(pitchClass: .A, octave: 2),
+      target3: .init(pitchClass: .D, octave: 3),
+      target4: .init(pitchClass: .G, octave: 3),
+      target5: .init(pitchClass: .B, octave: 3),
+      target6: .init(pitchClass: .E, octave: 4)
+    )))
 
     public init() { }
   }
@@ -23,9 +23,14 @@ public struct AppFeature: Reducer {
     case onAppear
     case recordPermissionResult(Bool)
     case setClosestNote(ClosestNote?)
+    case instruments(InstrumentsFeature.Action)
   }
 
   public var body: some ReducerOf<Self> {
+    Scope(state: \.instruments, action: /Action.instruments) {
+      InstrumentsFeature()
+    }
+
     Reduce { state, action in
       switch action {
       case .onAppear:
@@ -43,11 +48,11 @@ public struct AppFeature: Reducer {
         }
 
       case .recordPermissionResult(true):
-        return .run { [targetNotes = state.targetNotes] send in
+        return .run { [targetNotes = state.instruments.targetNotes] send in
           let stream = try await self.microphoneMonitor.start()
           for await (buffer, time) in stream {
-            let closest = try PitchDetection.process(buffer: buffer, time: time)
-              .closest(of: targetNotes)
+            let pitch = try PitchDetection.process(buffer: buffer, time: time)
+            let closest = pitch.closest(of: targetNotes)
             await send(.setClosestNote(closest))
           }
         } catch: { error, send in
@@ -58,10 +63,13 @@ public struct AppFeature: Reducer {
         return .none
 
       case let .setClosestNote(newValue):
-        state.closestNote = newValue
+        state.instruments.select(note: newValue?.note)
+        return .none
+
+      case .instruments:
         return .none
       }
-    }
+    }._printChanges()
   }
 
   public init() { }

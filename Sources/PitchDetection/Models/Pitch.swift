@@ -34,3 +34,9 @@ public struct Pitch: Equatable {
     NoteDistance.between(from: self, to: other)
   }
 }
+
+extension Pitch: Comparable {
+  public static func < (lhs: Pitch, rhs: Pitch) -> Bool {
+    lhs.frequency < rhs.frequency
+  }
+}

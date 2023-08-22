@@ -60,3 +60,9 @@ public struct Note: Equatable, Hashable {
     NoteDistance.between(from: self, to: other)
   }
 }
+
+extension Note: Comparable {
+  public static func < (lhs: Note, rhs: Note) -> Bool {
+    lhs.semitonesFromC0 < rhs.semitonesFromC0
+  }
+}

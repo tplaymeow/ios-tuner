@@ -5,21 +5,25 @@ import InstrumentFeature
 
 public struct AppView: View {
   public var body: some View {
-    InstrumentView()
-//    WithViewStore(self.store, observe: \.closestNote) { viewStore in
-//      VStack {
-//        if let closestNote = viewStore.state {
-//          Text(closestNote.note.displayString)
-//            .bold()
-//          Text(closestNote.distanceToNote.cents.formatted())
-//          Text(closestNote.pitch.frequency.formatted())
-//        }
-//      }
-//      .onAppear{
-//        viewStore.send(.onAppear)
-//      }
-//    }
+    ZStack {
+      InstrumentsView(
+        store: self.store.scope(state: \.instruments, action: AppFeature.Action.instruments)
+      )
+
+      WithViewStore(self.store, observe: { $0 }) { viewStore in
+        VStack {
+          if let closestNote = viewStore.instruments.selectedNote {
+            Text(closestNote.displayString)
+              .bold()
+          }
+        }
+      }
+    }
+    .onAppear{
+      self.store.send(.onAppear)
+    }
   }
+  
 
   public init(store: StoreOf<AppFeature>) {
     self.store = store
