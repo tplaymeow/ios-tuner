@@ -19,12 +19,10 @@ final class GuitarSceneProxy {
 
   init(store: StoreOf<InstrumentFeature<InstrumentState6>>) {
     self.store = store
-    self.viewStore = ViewStore(store, observe: { $0 })
     self.setup()
   }
 
   private let store: StoreOf<InstrumentFeature<InstrumentState6>>
-  private let viewStore: ViewStoreOf<InstrumentFeature<InstrumentState6>>
 
   private var cancellables: Set<AnyCancellable> = .init()
 
@@ -35,7 +33,8 @@ final class GuitarSceneProxy {
   }()
 
   private func setup() {
-    self.viewStore.publisher.target
+    self.store.publisher.target
+      .removeDuplicates()
       .sink { [weak self] target in
         guard let self else { return }
         self.update(target: target)

@@ -2,22 +2,48 @@ import ComposableArchitecture
 import SceneKit
 import SwiftUI
 
+@MainActor
+struct GuitarSceneView: View {
+  var body: some View {
+    SceneView(scene: self.proxy.scene, pointOfView: self.proxy.camera)
+  }
+
+  init(store: StoreOf<InstrumentFeature<InstrumentState6>>) {
+    self.store = store
+    self.proxy = GuitarSceneProxy(store: store)
+  }
+
+  private let store: StoreOf<InstrumentFeature<InstrumentState6>>
+  private let proxy: GuitarSceneProxy
+}
+
+@MainActor
+struct UkuleleSceneView: View {
+  var body: some View {
+    SceneView(scene: self.proxy.scene, pointOfView: self.proxy.camera)
+  }
+
+  init(store: StoreOf<InstrumentFeature<InstrumentState4>>) {
+    self.store = store
+    self.proxy = UkuleleSceneProxy(store: store)
+  }
+
+  private let store: StoreOf<InstrumentFeature<InstrumentState4>>
+  private let proxy: UkuleleSceneProxy
+}
+
 public struct InstrumentsView: View {
   public var body: some View {
     SwitchStore(self.store) { state in
       switch state {
       case .guitar:
         CaseLet(/InstrumentsFeature.State.guitar, action: InstrumentsFeature.Action.guitar) {
-          store in
-          let proxy = GuitarSceneProxy(store: store)
-          SceneView(scene: proxy.scene, pointOfView: proxy.camera)
+          GuitarSceneView(store: $0)
         }
 
       case .ukulele:
         CaseLet(/InstrumentsFeature.State.ukulele, action: InstrumentsFeature.Action.ukulele) {
-          store in
-          let proxy = UkuleleSceneProxy(store: store)
-          SceneView(scene: proxy.scene, pointOfView: proxy.camera)
+          UkuleleSceneView(store: $0)
         }
       }
     }
